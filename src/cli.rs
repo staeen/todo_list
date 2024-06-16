@@ -1,0 +1,26 @@
+use clap::{Arg, App, SubCommand, ArgMatches};
+
+pub fn get_matches() -> ArgMatches {
+    App::new("To-Do List")
+        .version("1.0")
+        .author("Stanzen <stan.dorjey2014@gmail.com>")
+        .about("Manages your tasks")
+        .subcommand(SubCommand::with_name("add")
+            .about("Adds a new task")
+            .arg(Arg::with_name("description")
+                .help("The description of the task")
+                .required(true)))
+        .subcommand(SubCommand::with_name("list")
+            .about("Lists all tasks"))
+        .subcommand(SubCommand::with_name("remove")
+            .about("Removes a task")
+            .arg(Arg::with_name("id")
+                .help("The ID of the task to remove")
+                .required(true)))
+        .subcommand(SubCommand::with_name("complete")
+            .about("Marks a task as complete")
+            .arg(Arg::with_name("id")
+                .help("The ID of the task to complete")
+                .required(true)))
+        .get_matches()
+}
